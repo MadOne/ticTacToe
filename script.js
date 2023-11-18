@@ -17,41 +17,41 @@ function playRound(playerSelection, computerSelection){
     
     //player rock
     if(playerSelection == "rock" && computerSelection == "rock") {
-        console.log("Draw");
+        setText("Draw");
     }
     if(playerSelection == "rock" && computerSelection == "paper") {
-        console.log("You Lose! Paper beats Rock");
+        setText("You Lose! Paper beats Rock");
         scoreComputer++;
     }
     if(playerSelection == "rock" && computerSelection == "scissors") {
-        console.log("You Win! Rock smashes scissors");
+        setText("You Win! Rock smashes scissors");
         scorePlayer++;
     }
 
     //player paper
     if(playerSelection == "paper" && computerSelection == "rock") {
-        console.log("You Win! Paper wraps Rock");
+        setText("You Win! Paper wraps Rock");
         scorePlayer++;
     }
     if(playerSelection == "paper" && computerSelection == "paper") {
-        console.log("Draw!");
+        setText("Draw!");
     }
     if(playerSelection == "paper" && computerSelection == "scissors") {
-        console.log("You Loose! Scissors cut paper!");
+        setText("You Loose! Scissors cut paper!");
         scoreComputer++;
     }
 
     //player scissors
     if(playerSelection == "scissors" && computerSelection == "rock") {
-        console.log("You Lose! Rock smashes Scissors");
+        setText("You Lose! Rock smashes Scissors");
         scoreComputer++;
     }
     if(playerSelection == "scissors" && computerSelection == "paper") {
-        console.log("You Win! Scissors cut Paper");
+        setText("You Win! Scissors cut Paper");
         scorePlayer++;
     }
     if(playerSelection == "scissors" && computerSelection == "scissors") {
-        console.log("Draw");
+        setText("Draw");
     }
 }
 
@@ -63,15 +63,65 @@ function game() {
     }
 }
 
-game()
 
-if (scorePlayer > scoreComputer) {
-    console.log(`You won the game ${scorePlayer} / ${scoreComputer}`);
-}
-if (scorePlayer < scoreComputer) {
-    console.log(`You loose the game ${scorePlayer} / ${scoreComputer}`);
+function result(scorePlayer, scoreComputer){
+    if (scorePlayer > scoreComputer) {
+        setText(`You won the game ${scorePlayer} / ${scoreComputer}`);
+    }
+    if (scorePlayer < scoreComputer) {
+        setText(`You loose the game ${scorePlayer} / ${scoreComputer}`);
+    }
+
+    if (scorePlayer == scoreComputer) {
+        setText(`The game is draw! ${scorePlayer} / ${scoreComputer}`);
+    }
 }
 
-if (scorePlayer == scoreComputer) {
-    console.log(`The game is draw! ${scorePlayer} / ${scoreComputer}`);
+
+let buttons = document.querySelector(".button-container");
+buttons.addEventListener('click', (event) => {
+    let target = event.target;
+    switch(target.id) {
+        case "rock":
+            playRound("rock", getComputerChoice())
+            updateScore()
+            break;
+        case "paper":
+            playRound("paper", getComputerChoice())
+            updateScore()
+            break;
+        case "scissors":
+            playRound("scissors", getComputerChoice())
+            updateScore()
+            break;
+    }
+})
+
+
+function updateScore(){
+    let domScorePlayer =  document.querySelector("#playerScore");
+        domScorePlayer.textContent = scorePlayer;
+        let domScoreComputer =  document.querySelector("#computerScore");
+        domScoreComputer.textContent = scoreComputer;
+
+        if (scoreComputer == 5) {
+            result(scoreComputer, scorePlayer);
+            reset();
+        }
+
+        if (scorePlayer == 5) {
+            result(scorePlayer, scoreComputer);
+            reset();
+        }
+}
+
+function reset(){
+    scoreComputer = 0;
+    scorePlayer = 0;
+    updateScore();
+}
+
+function setText(text){
+    let domText =  document.querySelector(".text");
+    domText.textContent = text
 }

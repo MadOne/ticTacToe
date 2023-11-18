@@ -1,0 +1,43 @@
+.button-container {
+    height: 300px;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.button {
+    border: 1px solid black;
+    
+}
+
+.page {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.score-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.score {
+    border: 1px solid black;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text {
+    border: 1px solid black;
+    height: 50px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
